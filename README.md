@@ -1,2 +1,2 @@
 # unlock-content
-Para desbloquear conteúdos pagos de alguns sites
+Uma extensão do chrome para desbloquear conteúdos pagos de alguns sites
