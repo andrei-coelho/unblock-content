@@ -11,15 +11,22 @@ document.addEventListener('scroll', _ => {
         if(window.location.hostname.search(/folha/gi) >= 0 ) folha();
 
         document.getElementById('__closeDataTemplate__').addEventListener('click', _ => {
-            console.log("clicou!");
             document.getElementById('__DataTemplate__').style.display = 'none';
         })
+		
     }, 1000);
     
 })
 
 
 function folha(){
+	var loop = setInterval(e => {
+		let paywall = document.getElementById('paywall-flutuante');
+		if(paywall != null){
+			paywall.style.display = 'none';
+			clearInterval(loop)
+		}
+	},500)
     document.body.innerHTML = template(document.getElementById('c-news').innerHTML) + document.body.innerHTML;
 }
 
