@@ -1,38 +1,53 @@
 
-var statusScroll = false;
+if(window.location.hostname.search(/folha/gi) >= 0 ) folha();
 
-document.addEventListener('scroll', _ => {
-    
-    if(statusScroll) return;
-    statusScroll = true;
+if(window.location.hostname.search(/oglobo/gi) >= 0 ) oglobo();
 
+
+function oglobo(){
+
+    let article = document.getElementsByTagName('article')[1];
+    let content = article.getElementsByClassName('article__content-container')[0].innerHTML;
     setTimeout(() => {
-
-        if(window.location.hostname.search(/folha/gi) >= 0 ) folha();
-
-        document.getElementById('__closeDataTemplate__').addEventListener('click', _ => {
-            document.getElementById('__DataTemplate__').style.display = 'none';
-        })
-		
-    }, 1000);
+        document.body.style.overflow = 'auto';
+        document.body.style.position = 'static';
+        add(content)
+    }, 1500);
     
-})
 
+}
 
 function folha(){
-	var loop = setInterval(e => {
-		let paywall = document.getElementById('paywall-flutuante');
-		if(paywall != null){
-			paywall.style.display = 'none';
-			clearInterval(loop)
-		}
-	},500)
-    document.body.innerHTML = template(document.getElementById('c-news').innerHTML) + document.body.innerHTML;
+    
+    var statusScroll = false;
+
+    document.addEventListener('scroll', _ => {
+    
+        if(statusScroll) return;
+        statusScroll = true;
+    
+        setTimeout(() => {
+    
+            var loop = setInterval(e => {
+                let paywall = document.getElementById('paywall-flutuante');
+                if(paywall != null){
+                    paywall.style.display = 'none';
+                    clearInterval(loop)
+                }
+            },500)
+
+            add(document.getElementById('c-news').innerHTML)
+            
+        }, 1000);
+        
+    })
+
+	
 }
 
 
-function template(data){
-    return `<div id="__DataTemplate__" style="
+function add(data){
+    let template = `<div id="__DataTemplate__" style="
         width: 90%;
         height: 100%;
         margin: auto;
@@ -45,8 +60,14 @@ function template(data){
         left:5%;
         background-color: white;
         overflow-y: scroll;
-        z-index:9999999999;
+        z-index:999999999999;
     "><button id="__closeDataTemplate__" style="float:right;">fechar</button>
     ${data}
     </div>`;
+
+    document.body.innerHTML = template + document.body.innerHTML;
+
+    document.getElementById('__closeDataTemplate__').addEventListener('click', _ => {
+        document.getElementById('__DataTemplate__').style.display = 'none';
+    })
 }
