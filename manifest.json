@@ -8,7 +8,9 @@
         {
             "matches": [
                 "*://*.folha.uol.com.br/*",
-                "*://*.oglobo.globo.com/*"
+                "*://*.oglobo.globo.com/*",
+                "*://*.valor.globo.com/*",
+                "*://*.veja.abril.com.br/*"
             ],
             "js": ["content.js"]
         }

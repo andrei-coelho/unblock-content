@@ -1,19 +1,46 @@
 
-if(window.location.hostname.search(/folha/gi) >= 0 ) folha();
+if(window.location.hostname.search(/folha/gi) >= 0 )  folha()
+if(window.location.hostname.search(/oglobo/gi) >= 0 ) oglobo()
+if(window.location.hostname.search(/veja/gi) >= 0 )   veja()
+if(window.location.hostname.search(/valor/gi) >= 0)   valor()
 
-if(window.location.hostname.search(/oglobo/gi) >= 0 ) oglobo();
 
 
-function oglobo(){
 
-    let article = document.getElementsByTagName('article')[1];
-    let content = article.getElementsByClassName('article__content-container')[0].innerHTML;
+// el país
+
+function valor(){
+    if(window.location.pathname == "/") return;
+    
+    let content = document.getElementsByTagName('main')[0].innerHTML;
     setTimeout(() => {
         document.body.style.overflow = 'auto';
         document.body.style.position = 'static';
         add(content)
     }, 1500);
+}
+
+function veja(){
+
+    let article = document.getElementsByTagName('article')[0],
+        content = article.getElementsByClassName('content')[0].innerHTML.split("</ul>")[1];
+        
+    setTimeout(_ => {
+        add(content)
+    }, 1500);
     
+}
+
+function oglobo(){
+
+    let article = document.getElementsByTagName('article')[1],
+        content = article.getElementsByClassName('article__content-container')[0].innerHTML;
+
+    setTimeout(() => {
+        document.body.style.overflow = 'auto';
+        document.body.style.position = 'static';
+        add(content)
+    }, 1500);
 
 }
 
